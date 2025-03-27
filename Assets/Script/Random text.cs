@@ -9,7 +9,7 @@ public class Randomtext : MonoBehaviour
     public Text text;
     public string[] strings;
     public string selectedText;
-    public int i;
+    private int i;
 
     void Start()
     {
@@ -23,10 +23,5 @@ public class Randomtext : MonoBehaviour
 
             text.text = $"Text : {selectedText}\n\nCharacter Positions:\n{charPositions}";
         }
-        Debug.Log(selectedText[0]);
-        Debug.Log(selectedText[1]);
-        Debug.Log(selectedText[2]);
-        Debug.Log(selectedText[3]);
-        Debug.Log(selectedText[4]);
     }
 }

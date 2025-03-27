@@ -8,448 +8,150 @@ using Unity.VisualScripting;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Linq;
+using UnityEngine.Windows;
 
-public class CheckKeyboard : MonoBehaviour
+public class WordleGame : MonoBehaviour
 {
-    public int num;
-    private int i;
-    private int j;
-    private int x = 0;
-    private int y = 0;
+    public int num = 5;  // กำหนดให้คำมี 5 ตัวอักษร
     public InputField PfBoxtext;
     public Transform Transform;
     public List<InputField> createdPfBoxtext = new List<InputField>();
     private int currentRow = 0;
     private int currentColumn = 0;
     public Image[] ButtomImage;
+    public string targetWord ;
+    private List<char> createdChar = new List<char>();
+    public GameObject win;
+    public GameObject lose;
     public Randomtext RDT;
+
     private void Start()
     {
         GenerateInputFields();
+        targetWord = RDT.selectedText.ToUpper();
     }
 
     public void GenerateInputFields()
     {
-
-        for (j = 0; j < 6; j++)
+        int x = 0, y = 0;
+        for (int j = 0; j < 6; j++) // 6 แถว
         {
-            for ( i = 0; i < num; i++)
+            for (int i = 0; i < num; i++) // 5 คำต่อแถว
             {
                 InputField newPF = Instantiate(PfBoxtext, transform);
-
                 createdPfBoxtext.Add(newPF);
-
                 newPF.transform.position += new Vector3(x, y, 0);
                 x += 45;
-               
             }
-
             x = 0;
             y -= 45;
-           
         }
     }
 
-    private void Update()
-    {
-        
-    }
-
-
-    public void KeyQ()
-    {
-        if (currentColumn < num)
-        {
-            int index = (currentRow * num) + currentColumn;
-            if (index < createdPfBoxtext.Count) 
-            {
-                createdPfBoxtext[index].text = "Q";
-                currentColumn++;
-            }  
-        }
-       
-    }
-    public void KeyW()
+    public void AddLetter(char letter)
     {
         if (currentColumn < num)
         {
             int index = (currentRow * num) + currentColumn;
             if (index < createdPfBoxtext.Count)
             {
-                createdPfBoxtext[index].text = "W";
+                createdPfBoxtext[index].text = letter.ToString();
                 currentColumn++;
+                createdChar.Add(letter);
             }
         }
     }
-    public void KeyE()
-    {
-        if (currentColumn < num)
-        {
-            int index = (currentRow * num) + currentColumn;
-            if (index < createdPfBoxtext.Count)
-            {
-                createdPfBoxtext[index].text = "E";
-                currentColumn++;
-            }
 
-        }
-    }
-    public void KeyR()
-    {
-        if (currentColumn < num)
-        {
-            int index = (currentRow * num) + currentColumn;
-            if (index < createdPfBoxtext.Count)
-            {
-                createdPfBoxtext[index].text = "R";
-                currentColumn++;
-               
-            }
-
-        }
-    }
-    public void KeyT()
-    {
-        if (currentColumn < num)
-        {
-            int index = (currentRow * num) + currentColumn;
-            if (index < createdPfBoxtext.Count)
-            {
-                createdPfBoxtext[index].text = "T";
-                currentColumn++;
-               
-            }
-
-        }
-    }
-    public void KeyY()
-    {
-        if (currentColumn < num)
-        {
-            int index = (currentRow * num) + currentColumn;
-            if (index < createdPfBoxtext.Count)
-            {
-                createdPfBoxtext[index].text = "Y";
-                currentColumn++;
-               
-            }
-
-        }
-    }
-    public void KeyU()
-    {
-        if (currentColumn < num)
-        {
-            int index = (currentRow * num) + currentColumn;
-            if (index < createdPfBoxtext.Count)
-            {
-                createdPfBoxtext[index].text = "U";
-                currentColumn++;
-                
-            }
-
-        }
-    }
-    public void KeyI()
-    {
-        if (currentColumn < num)
-        {
-            int index = (currentRow * num) + currentColumn;
-            if (index < createdPfBoxtext.Count)
-            {
-                createdPfBoxtext[index].text = "I";
-                currentColumn++;
-                
-            }
-
-        }
-    }
-    public void KeyO()
-    {
-        if (currentColumn < num)
-        {
-            int index = (currentRow * num) + currentColumn;
-            if (index < createdPfBoxtext.Count)
-            {
-                createdPfBoxtext[index].text = "O";
-                currentColumn++;
-                
-            }
-
-        }
-    }
-    public void KeyP()
-    {
-        if (currentColumn < num)
-        {
-            int index = (currentRow * num) + currentColumn;
-            if (index < createdPfBoxtext.Count)
-            {
-                createdPfBoxtext[index].text = "P";
-                currentColumn++;
-               
-
-            }
-        }
-    }
-    public void KeyA()
-    {
-        if (currentColumn < num)
-        {
-            int index = (currentRow * num) + currentColumn;
-            if (index < createdPfBoxtext.Count)
-            {
-                createdPfBoxtext[index].text = "A";
-                currentColumn++;
-              
-            }
-
-        }
-    }
-    public void KeyS()
-    {
-        if (currentColumn < num)
-        {
-            int index = (currentRow * num) + currentColumn;
-            if (index < createdPfBoxtext.Count)
-            {
-                createdPfBoxtext[index].text = "S";
-                currentColumn++;
-                
-            }
-
-        }
-    }
-    public void KeyD()
-    {
-        if (currentColumn < num)
-        {
-            int index = (currentRow * num) + currentColumn;
-            if (index < createdPfBoxtext.Count)
-            {
-                createdPfBoxtext[index].text = "D";
-                currentColumn++;
-                
-            }
-
-        }
-    }
-    public void KeyF()
-    {
-        if (currentColumn < num)
-        {
-            int index = (currentRow * num) + currentColumn;
-            if (index < createdPfBoxtext.Count)
-            {
-                createdPfBoxtext[index].text = "F";
-                currentColumn++;
-               
-            }
-
-        }
-    }
-    public void KeyG()
-    {
-        if (currentColumn < num)
-        {
-            int index = (currentRow * num) + currentColumn;
-            if (index < createdPfBoxtext.Count)
-            {
-                createdPfBoxtext[index].text = "G";
-                currentColumn++;
-               
-            }
-
-        }
-    }
-    public void KeyH()
-    {
-        if (currentColumn < num)
-        {
-            int index = (currentRow * num) + currentColumn;
-            if (index < createdPfBoxtext.Count)
-            {
-                createdPfBoxtext[index].text = "H";
-                currentColumn++;
-                
-            }
-
-        }
-    }
-    public void KeyJ()
-    {
-        if (currentColumn < num)
-        {
-            int index = (currentRow * num) + currentColumn;
-            if (index < createdPfBoxtext.Count)
-            {
-                createdPfBoxtext[index].text = "J";
-                currentColumn++;
-                
-            }
-
-        }
-    }
-    public void KeyK()
-    {
-        if (currentColumn < num)
-        {
-            int index = (currentRow * num) + currentColumn;
-            if (index < createdPfBoxtext.Count)
-            {
-                createdPfBoxtext[index].text = "K";
-                currentColumn++;
-               
-            }
-
-        }
-    }
-    public void KeyL()
-    {
-        if (currentColumn < num)
-        {
-            int index = (currentRow * num) + currentColumn;
-            if (index < createdPfBoxtext.Count)
-            {
-                createdPfBoxtext[index].text = "L";
-                currentColumn++;
-               
-            }
-
-        }
-    }
-    public void KeyZ()
-    {
-        if (currentColumn < num)
-        {
-            int index = (currentRow * num) + currentColumn;
-            if (index < createdPfBoxtext.Count)
-            {
-                createdPfBoxtext[index].text = "Z";
-                currentColumn++;
-               
-            }
-
-        }
-    }
-    public void KeyX()
-    {
-        if (currentColumn < num)
-        {
-            int index = (currentRow * num) + currentColumn;
-            if (index < createdPfBoxtext.Count)
-            {
-                createdPfBoxtext[index].text = "X";
-                currentColumn++;
-               
-            }
-
-        }
-    }
-    public void KeyC()
-    {
-        if (currentColumn < num)
-        {
-            int index = (currentRow * num) + currentColumn;
-            if (index < createdPfBoxtext.Count)
-            {
-                createdPfBoxtext[index].text = "C";
-                currentColumn++;
-              
-            }
-
-        }
-    }
-    public void KeyV()
-    {
-        if (currentColumn < num)
-        {
-            int index = (currentRow * num) + currentColumn;
-            if (index < createdPfBoxtext.Count)
-            {
-                createdPfBoxtext[index].text = "V";
-                currentColumn++;
-              
-            }
-
-        }
-    }
-    public void KeyB()
-    {
-        if (currentColumn < num)
-        {
-            int index = (currentRow * num) + currentColumn;
-            if (index < createdPfBoxtext.Count)
-            {
-                createdPfBoxtext[index].text = "B";
-                currentColumn++;
-             
-            }
-
-        }
-    }
-    public void KeyN()
-    {
-        if (currentColumn < num)
-        {
-            int index = (currentRow * num) + currentColumn;
-            if (index < createdPfBoxtext.Count)
-            {
-                createdPfBoxtext[index].text = "N";
-                currentColumn++;
-             
-            }
-
-        }
-    }
-    public void KeyM()
-    {
-        if (currentColumn < num)
-        {
-            int index = (currentRow * num) + currentColumn;
-            if (index < createdPfBoxtext.Count)
-            {
-                createdPfBoxtext[index].text = "M";
-                currentColumn++;
-             
-            }
-
-        }
-    }
     public void DEL()
     {
-        if (currentColumn > 0) 
+        if (currentColumn > 0)
         {
             currentColumn--;
-            int index = (currentRow * num) + currentColumn; 
-
-            if (index < createdPfBoxtext.Count) 
+            int index = (currentRow * num) + currentColumn;
+            if (index < createdPfBoxtext.Count)
             {
                 createdPfBoxtext[index].text = "";
+                createdChar.RemoveAt(createdChar.Count - 1);
             }
         }
     }
 
     public void Enter()
     {
-        // ตรวจสอบว่าแถวปัจจุบันกรอกครบทุกช่องแล้วหรือไม่
-        bool isRowComplete = true;
-        for (int i = 0; i < num; i++)
+        if (createdChar.Count != num) return; // หากคำไม่ครบ 5 ตัวอักษร
+
+        string createdWord = new string(createdChar.ToArray());
+
+        // เปรียบเทียบกับคำตอบ (targetWord)
+        CheckWord(createdWord);
+
+        // ถ้าคำถูกต้อง ให้เพิ่มแถวใหม่
+        if (createdWord == targetWord)
         {
-            int index = (currentRow * num) + i; // คำนวณตำแหน่งของช่องในแถวปัจจุบัน
-            if (index < createdPfBoxtext.Count && string.IsNullOrEmpty(createdPfBoxtext[index].text))
+            Debug.Log("You Win!");
+            win.SetActive(true);
+            foreach (Image image in ButtomImage)
             {
-                isRowComplete = false; // ถ้ามีช่องไหนที่ยังกรอกไม่ครบ จะไม่สามารถไปแถวใหม่ได้
-                break;
+                image.color = Color.green;
             }
         }
-
-        // ถ้ากรอกครบทุกช่องในแถวแล้ว จะไปแถวใหม่
-        if (isRowComplete)
+        else
         {
+            currentRow++;
+            currentColumn = 0;
+            createdChar.Clear();
 
+            if (currentRow >= 6) // เมื่อครบ 6 แถว ผู้เล่นแพ้
+            {
+                lose.SetActive(true);
+            }
         }
-
     }
 
+    private void CheckWord(string createdWord)
+    {
+        for (int i = 0; i < num; i++)
+        {
+            char currentChar = createdWord[i];
+            if (currentChar == targetWord[i]) // ตัวอักษรตรงกันที่ตำแหน่งเดียวกัน
+            {
+                createdPfBoxtext[(currentRow * num) + i].image.color = Color.green;
+            }
+            else if (targetWord.Contains(currentChar.ToString())) // ตัวอักษรอยู่ในคำแต่ไม่อยู่ในตำแหน่งที่ถูกต้อง
+            {
+                createdPfBoxtext[(currentRow * num) + i].image.color = Color.yellow;
+            }
+            else // ตัวอักษรไม่อยู่ในคำเลย
+            {
+                createdPfBoxtext[(currentRow * num) + i].image.color = Color.gray;
+            }
+        }
+    }
+
+    public void KeyQ() { AddLetter('Q'); }
+    public void KeyW() { AddLetter('W'); }
+    public void KeyE() { AddLetter('E'); }
+    public void KeyR() { AddLetter('R'); }
+    public void KeyT() { AddLetter('T'); }
+    public void KeyY() { AddLetter('Y'); }
+    public void KeyU() { AddLetter('U'); }
+    public void KeyI() { AddLetter('I'); }
+    public void KeyO() { AddLetter('O'); }
+    public void KeyP() { AddLetter('P'); }
+    public void KeyA() { AddLetter('A'); }
+    public void KeyS() { AddLetter('S'); }
+    public void KeyD() { AddLetter('D'); }
+    public void KeyF() { AddLetter('F'); }
+    public void KeyG() { AddLetter('G'); }
+    public void KeyH() { AddLetter('H'); }
+    public void KeyJ() { AddLetter('J'); }
+    public void KeyK() { AddLetter('K'); }
+    public void KeyL() { AddLetter('L'); }
+    public void KeyZ() { AddLetter('Z'); }
+    public void KeyX() { AddLetter('X'); }
+    public void KeyC() { AddLetter('C'); }
+    public void KeyV() { AddLetter('V'); }
+    public void KeyB() { AddLetter('B'); }
+    public void KeyN() { AddLetter('N'); }
+    public void KeyM() { AddLetter('M'); }
 }
