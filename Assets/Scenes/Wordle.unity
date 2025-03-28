@@ -2012,9 +2012,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 700083640}
   strings:
-  - apple
-  - books
-  - trees
+  - world
+  - plant
+  - break
+  - shiny
+  - flame
   selectedText: 
 --- !u!114 &700083640
 MonoBehaviour:
@@ -4899,7 +4901,7 @@ MonoBehaviour:
   - {fileID: 1594384755}
   - {fileID: 588001697}
   - {fileID: 1219046198}
-  targetWord: apple
+  targetWord: 
   win: {fileID: 1706418933}
   lose: {fileID: 2063279408}
   RDT: {fileID: 700083639}

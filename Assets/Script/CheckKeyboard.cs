@@ -12,7 +12,7 @@ using UnityEngine.Windows;
 
 public class WordleGame : MonoBehaviour
 {
-    public int num = 5;  // กำหนดให้คำมี 5 ตัวอักษร
+    public int num = 5;
     public InputField PfBoxtext;
     public Transform Transform;
     public List<InputField> createdPfBoxtext = new List<InputField>();
@@ -34,9 +34,9 @@ public class WordleGame : MonoBehaviour
     public void GenerateInputFields()
     {
         int x = 0, y = 0;
-        for (int j = 0; j < 6; j++) // 6 แถว
+        for (int j = 0; j < 6; j++) 
         {
-            for (int i = 0; i < num; i++) // 5 คำต่อแถว
+            for (int i = 0; i < num; i++) 
             {
                 InputField newPF = Instantiate(PfBoxtext, transform);
                 createdPfBoxtext.Add(newPF);
@@ -78,17 +78,15 @@ public class WordleGame : MonoBehaviour
 
     public void Enter()
     {
-        if (createdChar.Count != num) return; // หากคำไม่ครบ 5 ตัวอักษร
+        if (createdChar.Count != num) return;
 
         string createdWord = new string(createdChar.ToArray());
 
-        // เปรียบเทียบกับคำตอบ (targetWord)
         CheckWord(createdWord);
 
-        // ถ้าคำถูกต้อง ให้เพิ่มแถวใหม่
+        
         if (createdWord == targetWord)
         {
-            Debug.Log("You Win!");
             win.SetActive(true);
             foreach (Image image in ButtomImage)
             {
@@ -101,7 +99,7 @@ public class WordleGame : MonoBehaviour
             currentColumn = 0;
             createdChar.Clear();
 
-            if (currentRow >= 6) // เมื่อครบ 6 แถว ผู้เล่นแพ้
+            if (currentRow >= 6) 
             {
                 lose.SetActive(true);
             }
@@ -113,15 +111,15 @@ public class WordleGame : MonoBehaviour
         for (int i = 0; i < num; i++)
         {
             char currentChar = createdWord[i];
-            if (currentChar == targetWord[i]) // ตัวอักษรตรงกันที่ตำแหน่งเดียวกัน
+            if (currentChar == targetWord[i]) 
             {
                 createdPfBoxtext[(currentRow * num) + i].image.color = Color.green;
             }
-            else if (targetWord.Contains(currentChar.ToString())) // ตัวอักษรอยู่ในคำแต่ไม่อยู่ในตำแหน่งที่ถูกต้อง
+            else if (targetWord.Contains(currentChar.ToString())) 
             {
                 createdPfBoxtext[(currentRow * num) + i].image.color = Color.yellow;
             }
-            else // ตัวอักษรไม่อยู่ในคำเลย
+            else
             {
                 createdPfBoxtext[(currentRow * num) + i].image.color = Color.gray;
             }
